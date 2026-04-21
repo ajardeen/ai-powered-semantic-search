@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import React, { useRef, useEffect } from "react";
 
@@ -64,8 +63,8 @@ function AISearch({
         />
 
         {/* Search Body */}
-        <div className="relative flex  sm:flex-row sm:items-center gap-3 sm:gap-4 rounded-[1.5rem] sm:rounded-[2rem] px-4 sm:px-5 py-4 bg-white dark:bg-[#1e1f20] border border-black/5 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-none transition-colors duration-500 min-h-[52px] sm:min-h-[65px]">
-          <div className="flex items-center gap-3 w-full sm:w-auto">
+        <div className="relative flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 rounded-[1.5rem] sm:rounded-[2rem] px-4 sm:px-5 py-4 bg-white dark:bg-[#1e1f20] border border-black/5 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-none transition-colors duration-500 min-h-[52px] sm:min-h-[65px]">
+          <div className="flex items-center gap-3 flex-1 w-full">
             {/* Search / AI Icon */}
             <div className="relative h-5 w-5 sm:h-6 sm:w-6 shrink-0">
               <Image
@@ -99,7 +98,7 @@ function AISearch({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               autoFocus
-              className={`flex-1 min-w-fit sm:min-w-0 border-none bg-transparent text-sm sm:text-base lg:text-lg outline-none transition-colors duration-500 caret-blue-500 ${
+              className={`flex-1 border-none bg-transparent text-sm sm:text-base lg:text-lg outline-none transition-colors duration-500 caret-blue-500 ${
                 enableAiSearch
                   ? "text-slate-800 placeholder:text-slate-500/50 dark:text-blue-100"
                   : "text-slate-800 placeholder:text-slate-500/50 dark:text-white"
@@ -109,14 +108,14 @@ function AISearch({
 
           <button
             onClick={() => setEnableAiSearch(!enableAiSearch)}
-            className={`w-fit self-end-safe sm:w-auto sm:ml-auto relative rounded-full p-[1.5px] transition-all duration-500 active:scale-90 cursor-pointer ${
+            className={`w-full sm:w-auto relative rounded-full p-[1.5px] transition-all duration-500 active:scale-90 cursor-pointer ${
               enableAiSearch
                 ? "btn-active-border shadow-[0_0_15px_rgba(66,133,244,0.15)]"
                 : "bg-transparent"
             }`}
           >
             <div
-              className={`relative rounded-full px-2 py-1 sm:px-5 sm:py-2 text-sm font-bold transition-all duration-500 text-center ${
+              className={`relative rounded-full px-2 py-1 sm:px-5 sm:py-2 text-sm font-bold transition-all duration-500 text-center w-full sm:w-auto ${
                 enableAiSearch
                   ? "bg-white text-slate-900 dark:bg-[#1e1f20] dark:text-white"
                   : "border border-black/10 bg-black/[0.03] text-slate-600 hover:bg-black/[0.06] dark:border-white/10 dark:bg-white/[0.03] dark:text-gray-400 dark:hover:bg-white/10"
@@ -129,7 +128,8 @@ function AISearch({
                     : ""
                 }
               >
-                AI
+                <span className="sm:hidden">Enable AI</span>
+                <span className="hidden sm:inline">AI</span>
               </span>
             </div>
           </button>
@@ -143,7 +143,7 @@ function AISearch({
             <button
               key={index}
               onClick={() => setSearchQuery(suggestion)}
-              className="w-full sm:w-auto text-left rounded-lg border border-transparent hover:border-slate-500 bg-slate-50 px-3 sm:px-4 py-2 text-xs sm:text-sm text-slate-600 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-gray-400 dark:hover:bg-white/10 transition-colors cursor-pointer break-words"
+              className="w-fit  text-left rounded-lg border border-transparent hover:border-slate-500 bg-slate-50 px-3 sm:px-4 py-2 text-xs sm:text-sm text-slate-600 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-gray-400 dark:hover:bg-white/10 transition-colors cursor-pointer break-words"
             >
               {suggestion}
             </button>
