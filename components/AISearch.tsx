@@ -1,5 +1,6 @@
+import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 function AISearch({
   enableAiSearch,
@@ -13,10 +14,21 @@ function AISearch({
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [caretColorIndex, setCaretColorIndex] = useState(0);
+
+  const caretColors = ["#3b82f6", "#ef4444", "#eab308", "#22c55e"]; // Blue, Red, Yellow, Green
 
   useEffect(() => {
     inputRef.current?.focus();
   }, [enableAiSearch]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCaretColorIndex((prev) => (prev + 1) % caretColors.length);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const aiSuggestions = [
     "Outdoor security cameras with night vision",
@@ -63,7 +75,7 @@ function AISearch({
         />
 
         {/* Search Body */}
-        <div className="relative flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 rounded-[1.5rem] sm:rounded-[2rem] px-4 sm:px-5 py-4 bg-white dark:bg-[#1e1f20] border border-black/5 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-none transition-colors duration-500 min-h-[52px] sm:min-h-[65px]">
+        <div className="relative flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 rounded-[1.5rem] sm:rounded-[2rem] px-4 sm:px-5 py-4 bg-white dark:bg-[#1e1f20] border border-black/5 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-none transition-colors duration-500 h-[52px] sm:min-h-[65px]">
           <div className="flex items-center gap-3 flex-1 w-full">
             {/* Search / AI Icon */}
             <div className="relative h-5 w-5 sm:h-6 sm:w-6 shrink-0">
@@ -98,7 +110,8 @@ function AISearch({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               autoFocus
-              className={`flex-1 border-none bg-transparent text-sm sm:text-base lg:text-lg outline-none transition-colors duration-500 caret-blue-500 ${
+              style={{ caretColor: caretColors[caretColorIndex] }}
+              className={`flex-1 border-none bg-transparent text-sm sm:text-base lg:text-lg outline-none transition-colors duration-500 ${
                 enableAiSearch
                   ? "text-slate-800 placeholder:text-slate-500/50 dark:text-blue-100"
                   : "text-slate-800 placeholder:text-slate-500/50 dark:text-white"
@@ -138,13 +151,18 @@ function AISearch({
 
       {/* Suggestions */}
       {searchQuery === "" && (
-        <div className="mt-3 flex flex-col gap-2 sm:gap-3 animate-in fade-in duration-300">
+        <div className="mt-3 flex flex-col gap-2 sm:gap-3 animate-in fade-in duration-300 pointer-none:">
+          <p className="px-2 py-0.5 text-sm border-b border-slate-300 dark:border-white/10 text-slate-500 dark:text-gray-500">
+            Suggestion
+          </p>
+
           {suggestions.map((suggestion, index) => (
             <button
               key={index}
               onClick={() => setSearchQuery(suggestion)}
-              className="w-fit  text-left rounded-lg border border-transparent hover:border-slate-500 bg-slate-50 px-3 sm:px-4 py-2 text-xs sm:text-sm text-slate-600 hover:bg-slate-100 dark:border-white/10 dark:bg-white/5 dark:text-gray-400 dark:hover:bg-white/10 transition-colors cursor-pointer break-words"
+              className="w-fit flex items-center gap-2 text-left rounded-lg border border-transparent hover:border-slate-500! bg-slate-50 px-3 sm:px-4 py-2 text-xs sm:text-sm text-slate-600 hover:bg-slate-100 dark:hover:border-white/10 dark:bg-transparent dark:text-gray-400 dark:hover:bg-white/10! transition-colors cursor-pointer wrap-break-word"
             >
+              <ArrowUpRight size={14} />
               {suggestion}
             </button>
           ))}
