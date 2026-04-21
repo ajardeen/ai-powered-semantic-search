@@ -2,7 +2,6 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
-import { ThemeProviders } from "@/components/ThemeProvider";
 
 export default function Providers({ children }) {
   // We use useState to ensure the QueryClient is only created once
@@ -19,8 +18,6 @@ export default function Providers({ children }) {
   );
 
   return (
-    <ThemeProviders>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </ThemeProviders>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 }

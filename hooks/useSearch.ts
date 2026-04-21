@@ -1,20 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+const URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3000";
 
-const fetchProducts = async (query, isAi) => {
+const endPoint = "/api/search";
+const fetchProducts = async (query: string, isAi: boolean) => {
   if (!query) return [];
-  
+
   // Your backend URL
-  const { data } = await axios.get("http://localhost:5000/api/search", {
-    params: { 
-      query, 
-      mode: isAi ? "ai" : "regular" 
+  const { data } = await axios.get(`${URL}${endPoint}`, {
+    params: {
+      query,
+      mode: isAi ? "ai" : "regular",
     },
   });
   return data;
 };
 
-export function useSearch(query, isAi) {
+export function useSearch(query: string, isAi: boolean) {
   return useQuery({
     queryKey: ["products", query, isAi],
     queryFn: () => fetchProducts(query, isAi),
