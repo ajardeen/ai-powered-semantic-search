@@ -75,7 +75,7 @@ function AISearch({
         />
 
         {/* Search Body */}
-        <div className="relative flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 rounded-[1.5rem] sm:rounded-[2rem] px-4 sm:px-5 py-4 bg-white dark:bg-[#1e1f20] border border-black/5 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-none transition-colors duration-500 h-[52px] sm:min-h-[65px]">
+        <div className="relative flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 rounded-[1.5rem] sm:rounded-[2rem] px-4 sm:px-5 py-4 bg-white dark:bg-[#1e1f20] border border-black/5 dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:shadow-none transition-colors duration-500 sm:h-[52px] sm:min-h-[65px]">
           <div className="flex items-center gap-3 flex-1 w-full">
             {/* Search / AI Icon */}
             <div className="relative h-5 w-5 sm:h-6 sm:w-6 shrink-0">

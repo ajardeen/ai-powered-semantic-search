@@ -66,8 +66,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen overflow-auto bg-slate-50 text-slate-900 p-2 sm:p-20 dark:bg-[#0F1114] dark:text-white transition-colors duration-500">
-      <div className="w-full max-w-2xl mx-auto p-1">
-        <div className="mb-4 text-center">
+      <div className="w-full max-w-2xl mx-auto mt-5 sm:mt-0  p-1">
+        <div className="hidden sm:block mb-4 text-center">
           <span className=" inline-flex items-center gap-1 rounded border border-slate-200 bg-white px-2 py-1 text-[10px]  text-slate-500  dark:border-white/10 dark:bg-white/5 dark:text-gray-500">
             <kbd className="rounded border border-slate-300 bg-slate-100 px-1 font-bold text-blue-500 dark:border-white/10 dark:bg-white/5 dark:text-blue-400">
               Ctrl + /
@@ -114,7 +114,7 @@ export default function Home() {
           </p>
         )}
 
-        <div className="mt-8 grid gap-5 sm:grid-cols-1 lg:grid-cols-4">
+        <div className="mx-4 mt-5 grid gap-5 sm:grid-cols-1 lg:grid-cols-4">
           {products?.map((product: Product) => {
             const metric = product.score ? getMatchMetric(product.score) : null;
 
